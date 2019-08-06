@@ -2,6 +2,7 @@ package uk.ac.mdx;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -26,13 +27,13 @@ public class NearestNeighbourTSPAlgorithm extends TSPAlgorithm {
         Integer [] solutionArray = new Integer[theTSPProblem.getNumberOfCities()];
 
         // find origin of the tour
-        Integer origin = (int) (Math.random() * theTSPProblem.getNumberOfCities());
+        Integer origin = new Random().nextInt(theTSPProblem.getNumberOfCities());
         solutionArray[0] = origin;
         indexArray.remove(origin);
 
         int solIndex = 0;
 
-        while (indexArray.size() > 0) {
+        while (!indexArray.isEmpty()) {
 
             updateProgress(solIndex, theTSPProblem.getNumberOfCities());
 

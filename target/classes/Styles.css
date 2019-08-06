@@ -1,0 +1,161 @@
+/*
+    Created on : 06-May-2018, 12:09:38
+    Author     : Matthew M. Jones
+*/
+
+@font-face {
+    -fx-font-family: "Dax-Regular";
+}
+
+.root {
+    -fx-background-color: linear-gradient(black 0%, black 50%, white 85%, white 100%);
+    -fx-font-family: "Dax-Regular";
+    -fx-font-size: 12pt;
+}
+
+.menu-bar {
+    -fx-background-color: black;
+}
+.menu {
+    -fx-background-color: black;
+}
+
+.menu .context-menu {
+    -fx-border-radius: 2pt;
+    -fx-border-color: white;
+    -fx-background-color: black;
+}
+
+.menu .menu-item:focused {-fx-background-color: #e98300;}
+.menu .menu-item:focused > .label {-fx-background-color: #e98300;}
+
+.menu .label {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-family: "Dax-Regular";
+    -fx-font-size: 13pt;
+}
+
+.choice-box {
+    -fx-background-color: #6e6e6e;
+}
+
+.choice-box .context-menu {
+    -fx-border-radius: 4pt;
+    -fx-border-color: white;
+    -fx-background-color: black;
+}
+
+.choice-box .menu-item:focused { -fx-background-color: #e98300; }
+
+.choice-box .menu-item > .label { -fx-text-fill: white; }
+
+.choice-box .menu-item:focused > .label { -fx-text-fill: black; }
+
+.gridPane {
+    -fx-hgap: 10pt;
+    -fx-vgap: 20pt;
+}
+
+.split-pane:vertical {
+    -fx-background-color: transparent;
+}
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: transparent;
+}
+.split-pane:vertical > .split-pane-divider {
+    -fx-background-color: transparent;
+}
+
+.anchor-pane {
+    -fx-background-color: transparent;
+}
+
+.button {
+    -fx-background-color: #6e6e6e;
+    -fx-background-radius: 2pt;
+    -fx-background-size: 24pt;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-font: 12pt "Dax-Regular";
+}
+
+
+.button:pressed {
+    -fx-background-color: #dddddd;
+    -fx-text-fill: #0065BD;
+}
+
+.button:hover {
+    -fx-background-color: #e98300;
+}
+
+.label {
+    -fx-text-alignment: center;
+    -fx-font: 12pt "Dax-Regular";
+    -fx-text-fill: white;
+}
+
+.scroll-bar:horizontal {
+    -fx-background-radius: 0;
+    -fx-padding          : 0;
+    -fx-background-insets: 0;
+}
+
+.progress-bar .track {
+    -fx-background-color : transparent;
+    -fx-background-radius: 0;
+    -fx-padding          : 0.8em;
+}
+.progress-bar .bar {
+    -fx-background-color: #e98300;
+    -fx-background-insets: 8 0 8 0;
+    -fx-background-radius: 0;
+    -fx-padding: 1pt;
+}
+
+.progress-indicator .percentage {
+    -fx-fill: white;
+
+}
+
+.progress-indicator .spinner {
+    -fx-border-width: 0;
+
+}
+
+.progress-indicator .determinate-indicator .indicator {
+    -fx-progress-color: transparent;
+    -fx-background-color: transparent;
+    -fx-padding: 0.0;
+}
+
+.progress-indicator .determinate-indicator .progress {
+    -fx-background-color: transparent;
+}
+
+.my-canvas {
+    -fx-background-color: radial-gradient(focus-angle 45deg, focus-distance 20%, center 0 0, radius 50%, reflect, #dbceac, #afafaf 100%);
+    -fx-border-width: 4pt;
+    -fx-border-color: #afafaf;
+}
+
+.slider .thumb{
+    -fx-background-color: #e98300;
+    -fx-border-color: black;
+    -fx-border-width: 1pt;
+}
+
+.slider .track {
+    -fx-background-color: white;
+    -fx-background-radius: 0;
+}
+
+.slider .axis {
+    -fx-tick-label-fill: white;
+}
+
+.checkbox {
+    -fx-text-fill: white;
+}
+

@@ -94,7 +94,7 @@ public class TSPProblem {
     }
 
     public double distance(int i,int j) {
-        if (i < numberOfCities & j < numberOfCities & i >=0 & j >= 0) {
+        if (i < numberOfCities && j < numberOfCities && i >=0 && j >= 0) {
             return distanceArray[i][j];
         } else {
             return Double.NaN;

@@ -5,9 +5,9 @@ package uk.ac.mdx;
  * algorithms
  * @author Matthew M. Jones
  */
-abstract class Crossover {
+interface Crossover {
 
-    public abstract Tour makeChild(Tour parentA, Tour parentB);
+    Tour makeChild(Tour parentA, Tour parentB);
 
-    public abstract Population makeChildren(Population parents, int numberOfChildren);
+    Population makeChildren(Population parents, int numberOfChildren);
 }

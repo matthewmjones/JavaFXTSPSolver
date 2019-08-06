@@ -2,13 +2,17 @@ package uk.ac.mdx;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  * An implementation of the Order Based Crossover
  * This is O(n^2) where n is the size of the Tour
  * @author Matthew M. Jones
  */
-public class OrderBasedCrossover extends Crossover {
+public class OrderBasedCrossover implements Crossover {
+
+    private Random rand = new Random();
+
 
     @Override
     public Tour makeChild(Tour parentA, Tour parentB) {
@@ -50,7 +54,7 @@ public class OrderBasedCrossover extends Crossover {
 
         for (int i = 0; i < numberOfChildren; i++) {
             childrenPopulation
-                    .add(makeChild(parents.getItem((int) (Math.random() * parents.getSize())), parents.getItem((int) (Math.random() * parents.getSize()))));
+                    .add(makeChild(parents.getItem(rand.nextInt(parents.getSize())), parents.getItem(rand.nextInt(parents.getSize()))));
         }
         return childrenPopulation;
     }

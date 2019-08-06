@@ -25,7 +25,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * Main controller for the GUI
@@ -37,10 +36,10 @@ public class FXMLGUIController implements Initializable {
     private static final double     PATH_LINE_WIDTH                 = 3.0;
     private static final int        NUMBER_OF_VERTICAL_GRID_LINES   = 23;
     private static final int        NUMBER_OF_HORIZONTAL_GRID_LINES = 23;
-    private static final double     CANVAS_RATIO_WIDTH              =
-            NUMBER_OF_VERTICAL_GRID_LINES > NUMBER_OF_HORIZONTAL_GRID_LINES ? (double) NUMBER_OF_VERTICAL_GRID_LINES / (double) NUMBER_OF_HORIZONTAL_GRID_LINES : 1;
-    private static final double     CANVAS_RATIO_HEIGHT             =
-            NUMBER_OF_VERTICAL_GRID_LINES < NUMBER_OF_HORIZONTAL_GRID_LINES ? (double) NUMBER_OF_HORIZONTAL_GRID_LINES / (double) NUMBER_OF_VERTICAL_GRID_LINES : 1;
+    // private static final double     CANVAS_RATIO_WIDTH              =
+    //        NUMBER_OF_VERTICAL_GRID_LINES > NUMBER_OF_HORIZONTAL_GRID_LINES ? (double) NUMBER_OF_VERTICAL_GRID_LINES / (double) NUMBER_OF_HORIZONTAL_GRID_LINES : 1;
+    // private static final double     CANVAS_RATIO_HEIGHT             =
+    //        NUMBER_OF_VERTICAL_GRID_LINES < NUMBER_OF_HORIZONTAL_GRID_LINES ? (double) NUMBER_OF_HORIZONTAL_GRID_LINES / (double) NUMBER_OF_VERTICAL_GRID_LINES : 1;
 
     private static Path currentPath;
 
@@ -87,6 +86,9 @@ public class FXMLGUIController implements Initializable {
     private Label lengthLabel;
 
     @FXML
+    private Label numberOfCitiesLabel;
+
+    @FXML
     private Canvas backgroundCanvas;
 
     @FXML
@@ -98,12 +100,10 @@ public class FXMLGUIController implements Initializable {
 
     private static HashMap<String, Integer> algHM;
 
-    private static final TSPProblem theTSPProblem = TSPProblem.getProblem();
+    // private static final TSPProblem theTSPProblem = TSPProblem.getProblem();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        settingsStage.initStyle(StageStyle.UNIFIED);
 
         saveCreatedProblemBtn.setVisible(false);
         snapToGridCB.setVisible(false);
@@ -134,6 +134,25 @@ public class FXMLGUIController implements Initializable {
 
         mainAnchorPane.heightProperty().addListener(e -> {
             hasResized();
+        });
+
+        mainAnchorPane.setOnKeyPressed( e -> {
+            switch (e.getCode()) {
+                case CLOSE_BRACKET:
+                    incrementNumberOfCities();
+                    Platform.runLater(() -> {
+                        FXMLGUIController.this.setNewProblem();
+                        FXMLGUIController.this.drawCities();
+                    });
+                    break;
+                case OPEN_BRACKET:
+                    decrementNumberOfCities();
+                    Platform.runLater(() -> {
+                        FXMLGUIController.this.setNewProblem();
+                        FXMLGUIController.this.drawCities();
+                    });
+                    break;
+            }
         });
     }
 
@@ -373,7 +392,7 @@ public class FXMLGUIController implements Initializable {
 
             // Run through to find the start of the nodes
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("NAME") | line.startsWith("COMMENT")) {
+                if (line.startsWith("NAME") || line.startsWith("COMMENT")) {
                     System.out.println(":: " + line);
                 }
 
@@ -537,6 +556,18 @@ public class FXMLGUIController implements Initializable {
         Alert alertBox;
         alertBox = new Alert(Alert.AlertType.INFORMATION, warningText);
         alertBox.showAndWait();
+    }
+
+    private void incrementNumberOfCities() {
+        if (numberOfCitiesSlider.getValue() != numberOfCitiesSlider.getMax()) {
+            numberOfCitiesSlider.setValue(numberOfCitiesSlider.getValue() + 1.0d);
+        }
+    }
+
+    private void decrementNumberOfCities() {
+        if (numberOfCitiesSlider.getValue() != numberOfCitiesSlider.getMin()) {
+            numberOfCitiesSlider.setValue(numberOfCitiesSlider.getValue() - 1.0d);
+        }
     }
 }
 

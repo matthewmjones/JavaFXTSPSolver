@@ -1,5 +1,7 @@
 package uk.ac.mdx;
 
+import java.util.Random;
+
 /**
  * Runs the genetic algorithm solver for the current TSPProblem
  * @author Matthew M. Jones
@@ -16,8 +18,10 @@ public class GeneticAlgorithmTSPAlgorithm extends TSPAlgorithm {
 
     boolean slowed = ParameterRepository.Store().isSlowMotion();
 
+    private final Random rand = new Random();
 
-    synchronized private Population nextGeneration(Population currentPopulation) {
+
+     private synchronized Population nextGeneration(Population currentPopulation) {
 
         Population children = new Population();
 
@@ -31,10 +35,10 @@ public class GeneticAlgorithmTSPAlgorithm extends TSPAlgorithm {
         Population parents = currentPopulation.getParents(numberOfParents);
 
         for (int i = elitismOffset; i < Math.floor(birthRate * numberOfParents); i++) {
-            int parentAIndex = (int) (Math.random() * numberOfParents);
-            int parentBIndex = (int) (Math.random() * numberOfParents);
+            int parentAIndex = rand.nextInt(numberOfParents);
+            int parentBIndex = rand.nextInt(numberOfParents);
             while (parentAIndex == parentBIndex) {
-                parentBIndex = (int) (Math.random() * numberOfParents);
+                 parentBIndex = rand.nextInt(numberOfParents);
             }
 
             children.add(
@@ -56,7 +60,7 @@ public class GeneticAlgorithmTSPAlgorithm extends TSPAlgorithm {
     }
 
     @Override
-    public Void call() {
+    public Void call() throws InterruptedException {
         updateProgress(0,1);
         Population population = new Population(populationSize);
 
@@ -76,7 +80,10 @@ public class GeneticAlgorithmTSPAlgorithm extends TSPAlgorithm {
                 if (slowed) {
                     Thread.sleep(10);
                 }
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                this.done();
+            }
         }
         updateProgress(numberOfGenerations, numberOfGenerations);
         return null;

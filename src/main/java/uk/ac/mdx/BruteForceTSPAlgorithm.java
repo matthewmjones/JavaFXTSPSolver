@@ -16,7 +16,7 @@ public class BruteForceTSPAlgorithm extends TSPAlgorithm {
     }
 
     @Override
-    public Void call() {
+    public Void call() throws CloneNotSupportedException {
         Tour bestTour = Tour.generateDefaultTour();
         double bestLength = bestTour.length();
 
@@ -30,7 +30,7 @@ public class BruteForceTSPAlgorithm extends TSPAlgorithm {
 
         int [] c = IntStream.range(0,n).map(i -> 0).toArray();
 
-        int [] A = IntStream.range(0,n).map(i -> n - i - 1).toArray();
+        int [] tempArray = IntStream.range(0,n).map(i -> n - i - 1).toArray();
 
         int i = 0;
 
@@ -42,22 +42,25 @@ public class BruteForceTSPAlgorithm extends TSPAlgorithm {
 
             if (c[i] < i) {
                 if (i % 2 == 0) {
-                    swap(A,0,i);
+                    swap(tempArray,0,i);
                 } else {
-                    swap(A,c[i],i);
+                    swap(tempArray,c[i],i);
                 }
 
                 // check best Tour
                 Tour nextTour = new Tour(
                         // Use of the Stream API to create an array copy of A
-                        IntStream.of( A ).boxed().toArray( Integer[]::new )
+                        IntStream.of( tempArray ).boxed().toArray( Integer[]::new )
                 );
                 if (nextTour.length() < bestLength) {
                     try {
                         bestTour = nextTour.clone();
                         bestLength = nextTour.length();
                         FXMLGUIController.GUIController().setCurrentPath(bestTour);
-                    } catch (CloneNotSupportedException ex) {}
+                    } catch (CloneNotSupportedException ex) {
+                        ex.printStackTrace();
+                        throw new CloneNotSupportedException();
+                    }
                 }
                 c[i] += 1;
                 i = 0;

@@ -88,8 +88,8 @@ public class FXMLSettingsController implements Initializable {
 
         String selectedItem = crossoverChoiceBox.getSelectionModel().getSelectedItem();
 
-
-        //FXMLGUIController.GUIController().closeSettingsMenu();
+        // Uncomment this if you want the window to close on save
+        // FXMLGUIController.GUIController().closeSettingsMenu();
 
     }
 

@@ -26,7 +26,7 @@ public class Path implements Cloneable {
 
     }
 
-    Path(Integer[] thePath) throws IllegalArgumentException {
+    Path(Integer[] thePath) {
         this.thePath = new ArrayList<>();
         for (Integer i : thePath) {
             if (i < 0) {
@@ -113,9 +113,7 @@ public class Path implements Cloneable {
     @Override
     protected Path clone() throws CloneNotSupportedException {
         Path clonedPath = new Path(this.size());
-        for (int i = 0; i < this.size(); i++) {
-            clonedPath.add(this.get(i));
-        }
+        for (int i = 0; i < this.size(); i++) clonedPath.add(this.get(i));
         return clonedPath;
     }
 

@@ -35,14 +35,14 @@ public class ThreeOptTSPAlgorithm extends TSPAlgorithm {
             while (hasChanged) {
                 iteration++;
                 hasChanged = false;
-                outer: for (int i = 0; i < startingTour.size() - 2; i++) {
+                for (int i = 0; i < startingTour.size() - 2; i++) {
                     updateProgress(sequence[iteration - 1] + (sequence[iteration] - sequence[iteration - 1]) * (double) i / (double) startingTour.size(),1);
 
                     for (int j = 0; j < startingTour.size() - 1; j++) {
 
                         for (int k = 0; k < startingTour.size(); k++) {
 
-                            if (TSPAlgorithmFactory.getInstance().isCancelled()) { break outer; }
+                            if (TSPAlgorithmFactory.getInstance().isCancelled()) { break; }
 
                             Tour potentialTour = bestTour.clone();
                             potentialTour.threeOpt(i, j, k);
